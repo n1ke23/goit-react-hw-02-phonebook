@@ -1,7 +1,6 @@
 import React from 'react';
 
-const Input = ({name, inputFuncWrite}) => {
-  // console.log('2', inputFuncWrite);
+const Input = ({name, inputFuncWrite, value}) => {
   return (
     <>
       <p className="form__text">{name.charAt(0).toUpperCase() + name.slice(1)}</p>
@@ -9,8 +8,8 @@ const Input = ({name, inputFuncWrite}) => {
           placeholder={name.charAt(0).toUpperCase() + name.slice(1)}
           type="text"
           name={name}
-          // value={value} 
-           onChange={inputFuncWrite}
+          value={value}
+          onChange={inputFuncWrite}
         />
     </>  );
 };
