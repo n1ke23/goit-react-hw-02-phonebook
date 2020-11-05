@@ -1,52 +1,47 @@
 import React, { useState } from 'react';
-import Input from './Input/Input.js';
 import { v4 as uuidv4 } from 'uuid';
+import ContactForm from './ContactForm/ContactForm';
+import Filter from './Filter/Filter';
+import ContactList from './ContactList/ContactList';
 
 const state = {
-  contacts: [],
-  name: '',
-  number: ''
-}
+  contacts: [
+    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' }
+  ],
+  filter: ''
+};
 
 const TodoList = () => {
-  // const [name, setName] = useState('')
-  const [obj, setObj] = useState({...state})
-  const inputHandler = ({target}) => {
+  const [obj, setObj] = useState({ ...state });
+
+  const inputFilter = ({ target }) => {
     const { value, name } = target;
-    setObj({...obj,
-      [name]: value
-        })
+    setObj(prev => ({ ...prev, [name]: value }))
+  };
+  const delContact = (id) => {
+    const contacts = obj.contacts.filter((el) => el.id !== id)
+    setObj((prev) => ({ ...prev, contacts }))
   }
 
-  const addContact = (e) => {
-    e.preventDefault();
-    const {name, number}=obj;
-    setObj(prev=>({contacts: [...prev.contacts,{name, number, id:uuidv4()}], name:"", number:""}));
-    console.log(obj);
+  const vissbleTask = () => {
+    return obj.contacts.filter(el => el.name.toLowerCase().includes(obj.filter.toLowerCase))
   }
+  const filterTask = vissbleTask()
+  // console.log(filterTask);
 
   return (
     <>
-      <form onSubmit={addContact}>
-          {/* {Object.keys(obj).map((el) => (el == 'contacts') ? '' : <Input key={uuidv4()} value={obj[el]} name={el} inputFuncWrite={inputHandler}/>)} */}
-          <p className="form__text">Name / Surname</p>
-            <input className="input__form"
-                placeholder='Name'
-                type="text"
-                name="name"
-                value={obj.name} 
-                onChange={inputHandler}
-              />
-            <p className="form__text">Number</p>
-            <input className="input__form"
-                placeholder='Number'
-                type="text"
-                name="number"
-                value={obj.number}
-                onChange={inputHandler} 
-              />
-          <button type='submit'>Add contact</button>
-      </form>
+      <div>
+        <h1>Phonebook</h1>
+        <ContactForm setObj={setObj} />
+
+        <h2>Contacts</h2>
+        <Filter inputHandlerFilter={inputFilter} filter={obj.filter} />
+        <ContactList obj={obj} filter={filterTask} deleteContact={delContact} />
+      </div>
     </>
   );
 };

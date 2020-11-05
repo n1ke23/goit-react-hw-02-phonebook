@@ -7,7 +7,8 @@ const App = () => {
 
   return (
     <>
-      <TodoList/>
+      <TodoList />
+
     </>
   );
 }
