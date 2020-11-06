@@ -31,16 +31,25 @@ const TodoList = () => {
   }
 
   const filterTask = vissbleTask()
+  const addContact = (user) => {
+    if (obj.contacts.some(el => el.name === user.name)) {
+      alert(`${user.name} уже записанно, введите другое имя!`)
+    } else {
+      setObj(prev => ({ ...prev, contacts: [...prev.contacts, { id: uuidv4(), ...user }] }));
+    }
+  };
+
 
   return (
     <>
       <div>
         <h1>Phonebook</h1>
-        <ContactForm setObj={setObj} obj={obj} />
+        <ContactForm addContact={addContact} />
 
         <h2>Contacts</h2>
         <Filter inputHandlerFilter={inputFilter} filter={obj.filter} />
         <ContactList obj={obj} filter={filterTask} deleteContact={delContact} />
+
       </div>
     </>
   );
