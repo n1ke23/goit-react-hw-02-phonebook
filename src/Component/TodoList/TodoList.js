@@ -29,6 +29,7 @@ const TodoList = () => {
   const vissbleTask = () => {
     return obj.contacts.filter(el => el.name.toLowerCase().includes(obj.filter.toLowerCase()))
   }
+
   const filterTask = vissbleTask()
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from "prop-types";
 
-const ContactForm = ({ inputHandlerFilter, filter }) => {
+const Filter = ({ inputHandlerFilter, filter }) => {
 
     return (
         <>
@@ -18,4 +19,9 @@ const ContactForm = ({ inputHandlerFilter, filter }) => {
     );
 };
 
-export default ContactForm;
+export default Filter;
+
+Filter.propTypes = {
+    inputHandlerFilter: PropTypes.func.isRequired,
+    filter: PropTypes.string.isRequired,
+}

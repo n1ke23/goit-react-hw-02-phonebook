@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
+import PropTypes from "prop-types";
+import './ContactForm.css'
 
 const ContactForm = ({ setObj }) => {
 
@@ -19,22 +20,22 @@ const ContactForm = ({ setObj }) => {
 
     return (
         <>
-            <form onSubmit={addContact}>
-                <p className="form__text">Name</p>
-                <input className="input__form"
+            <form className="form" onSubmit={addContact}>
+                <p className="form-text">Name</p>
+                <input className="input-form"
                     type="text"
                     name="name"
                     value={objForm.name}
                     onChange={inputHandler}
                 />
-                <p className="form__text">Number</p>
-                <input className="input__form"
+                <p className="form-text">Number</p>
+                <input className="input-form"
                     type="tel"
                     name="number"
                     value={objForm.number}
                     onChange={inputHandler}
                 />
-                <button type='submit'>Add contact</button>
+                <button className="contact-form-btn" type='submit'>Add contact</button>
             </form>
 
 
@@ -44,3 +45,8 @@ const ContactForm = ({ setObj }) => {
 };
 
 export default ContactForm;
+
+
+ContactForm.propTypes = {
+    setObj: PropTypes.func.isRequired,
+}
