@@ -47,5 +47,5 @@ export default ContactForm;
 
 
 ContactForm.propTypes = {
-    setObj: PropTypes.func.isRequired,
+    addContact: PropTypes.func.isRequired,
 }
