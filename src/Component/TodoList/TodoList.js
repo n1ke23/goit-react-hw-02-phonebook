@@ -36,7 +36,7 @@ const TodoList = () => {
     <>
       <div>
         <h1>Phonebook</h1>
-        <ContactForm setObj={setObj} />
+        <ContactForm setObj={setObj} obj={obj} />
 
         <h2>Contacts</h2>
         <Filter inputHandlerFilter={inputFilter} filter={obj.filter} />

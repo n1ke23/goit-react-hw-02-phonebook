@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import PropTypes from "prop-types";
 import './ContactForm.css'
 
-const ContactForm = ({ setObj }) => {
+const ContactForm = ({ setObj, obj }) => {
 
     const [objForm, setObjForm] = useState({ name: '', number: '' });
     const inputHandler = ({ target }) => {
@@ -14,7 +14,11 @@ const ContactForm = ({ setObj }) => {
     const addContact = (e) => {
         e.preventDefault();
         const { name, number } = objForm;
-        setObj(prev => ({ ...prev, contacts: [...prev.contacts, { id: uuidv4(), name, number }] }));
+        if (obj.contacts.find(el => el.name === name)) {
+            alert(`${name} уже записанно, введите другое имя!`)
+        } else {
+            setObj(prev => ({ ...prev, contacts: [...prev.contacts, { id: uuidv4(), name, number }] }));
+        }
         setObjForm({ name: '', number: '' });
     };
 
